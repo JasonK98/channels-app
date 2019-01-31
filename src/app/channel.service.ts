@@ -9,9 +9,9 @@ import { CHANNELS } from './channel/channel-mock';
 })
 export class ChannelService {
 
-	primary		: Channel[];
-	secondary	: Channel[];
-
+	primary		: Channel;
+	secondary	: Channel;
+	
 	constructor() { }
 
 	getChannels(): Observable<Channel[]> {
@@ -19,12 +19,6 @@ export class ChannelService {
 	}
 
 	setRedudancy() {
-		// var json = JSON.stringify( this.primary );
-		// console.log( JSON );
-		// console.log( this.secondary );
-		// this.primary.redudancy_id = this.secondary.id;
-		//console.log( this.primary );
-		//console.log( this.secondary );
 		if ( this.primary.redudancy_id === this.secondary.id ) {
 			if ( this.primary.redudancy_id !== null ) {
 				this.primary.redudancy_id = null
@@ -33,25 +27,4 @@ export class ChannelService {
 			this.primary.redudancy_id = this.secondary.id;
 		}
 	}
-
-	setRedudancyChannel( index ) {
-		// if ( CHANNELS[ index ].redudancy_id !== null ) {
-		// 	CHANNELS[ index ].redudancy_id = null;
-		// } 
-	}
-
-	isSelected( index ) {
-		// if ( CHANNELS[ index ].redudancy_id !== null ) {
-		// 	return true;
-		// }
-	}
-
-	isInList( index ) {
-		console.log( this.primary.redudancy_id );
-		if ( this.primary.redudancy_id !== null ) {
-			//CHANNELS[ index ].redudancy_id = null;
-		}
-		console.log( CHANNELS[ index ].redudancy_id );
-	}
-
 }

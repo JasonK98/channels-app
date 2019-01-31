@@ -1,8 +1,8 @@
-div.container {
+table {
 	cursor: pointer;
 }
 
 .table tr.active td {
-  background-color:#123456 !important;
+  background-color: #1E90FF !important;
   color: white;
 }

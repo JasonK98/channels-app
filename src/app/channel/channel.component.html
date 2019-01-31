@@ -1,28 +1,34 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-6">
-			<h3>Primary Channel</h3>
-			<table class="table table-hover">
-			    <thead>
-			        <tr>
-			            <th>ID</th>
-			            <th>Name</th>
-			            <th>URI</th>
-			            <th>Redudancy ID</th>
-			        </tr>
-			    </thead>
-			    <tbody>
-			        <tr *ngFor="let channel of channels; let i = index" (click)="setClickedRow( i, channel )" [class.active]="i == selectedRow">
-			            <td>{{ channel.id }}</td>
-			            <td>{{ channel.name }}</td>
-			            <td>{{ channel.uri }}</td>
-			            <td>{{ channel.redudancy_id }}</td>
-			        </tr>
-			    </tbody>
-			</table>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h4>Primary Channel</h4>
+				</div>
+				<table class="table table-hover">
+				    <thead>
+				        <tr>
+				            <th>ID</th>
+				            <th>Name</th>
+				            <th>URI</th>
+				            <th>Redudancy ID</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				        <tr *ngFor="let channel of channels; let i = index"
+				        	(click)="setClickedRow( i, channel )" 
+				        	[class.active]="i == selectedRow"
+				        	[class.success]="channel.redudancy_id !== null">
+				            <td>{{ channel.id }}</td>
+				            <td>{{ channel.name }}</td>
+				            <td>{{ channel.uri }}</td>
+				            <td>{{ channel.redudancy_id }}</td>
+				        </tr>
+				    </tbody>
+				</table>
+			</div>
 		</div>
 		<div *ngIf="primaryChannel" class="col-xs-6">
-			<h3>Secondary Channel</h3>
 			<app-channel-secondary [primary]="primaryChannel"></app-channel-secondary>
 		</div>
 	</div>

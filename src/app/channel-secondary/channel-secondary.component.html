@@ -1,16 +1,23 @@
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>URI</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let channel of channels; let i = index" (click)="setClickedRow(i)" [class.active]="primary.redudancy_id === channel.id">
-            <td>{{ channel.id }}</td>
-            <td>{{ channel.name }}</td>
-            <td>{{ channel.uri }}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4>Secondary Channel</h4>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>URI</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let channel of channels; let i = index" 
+                (click)="setClickedRow(i)" 
+                [class.active]="primary.redudancy_id === channel.id">
+                <td>{{ channel.id }}</td>
+                <td>{{ channel.name }}</td>
+                <td>{{ channel.uri }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

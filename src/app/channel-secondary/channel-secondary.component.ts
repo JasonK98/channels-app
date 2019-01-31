@@ -28,7 +28,6 @@ export class ChannelSecondaryComponent implements OnInit {
 	}
 
 	setClickedRow = function( index ) {
-		this.channelService.isInList( index );
     	this.selectedRow = index;
     	this.channelService.secondary = this.channels[ index ];
     	this.channelService.setRedudancy();
