@@ -9,13 +9,20 @@ import { CHANNELS } from './channel/channel-mock';
 })
 export class ChannelService {
 
+	channels	: Channel[] = CHANNELS;
 	primary		: Channel;
 	secondary	: Channel;
 	
 	constructor() { }
 
 	getChannels(): Observable<Channel[]> {
-		return of( CHANNELS );
+		// Required deep copy to avoid json data being overwritten and passed as reference
+		// this will pass the data in it's orginal format allowing it be unique to both
+		// the primary and secondary channel lists.
+		// This fixed problem with the ordering not being unique to each list.
+		let channels = CHANNELS.map( x => Object.assign( {}, x ) );
+		console.log( channels );
+		return of( channels );
 	}
 
 	setRedudancy() {

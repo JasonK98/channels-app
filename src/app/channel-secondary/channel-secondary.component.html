@@ -1,18 +1,31 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h4>Secondary Channel</h4>
+        <div class="form-group row">
+            <div class="col-xs-6">
+                <input placeholder="Search...." type="text" class="form-control form-control-sm" name="search" [(ngModel)]="filter">
+            </div>
+        </div>  
     </div>
+    <pre (click)="getIndex( primary.redudancy_id )">Click Me</pre>
+    <pre>{{ page }}</pre>
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>URI</th>
+                <th (click)="sort( 'id' )">ID
+                    <span class="glyphicon sort-icon" *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th (click)="sort( 'name' )">Name
+                    <span class="glyphicon sort-icon" *ngIf="key =='name'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th (click)="sort( 'uri' )">URI
+                    <span class="glyphicon sort-icon" *ngIf="key =='uri'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let channel of channels; let i = index" 
-                (click)="setClickedRow(i)" 
+            <tr *ngFor="let channel of channels | orderBy: key : reverse | filter : filter | paginate: { itemsPerPage: 10, currentPage: page, id: 'secondary' };trackBy:trackByFn; let i = index"
+                (click)="setClickedRow( i )" 
                 [class.active]="primary.redudancy_id === channel.id">
                 <td>{{ channel.id }}</td>
                 <td>{{ channel.name }}</td>
@@ -20,4 +33,6 @@
             </tr>
         </tbody>
     </table>
+    <hr>
+    <pagination-controls (pageChange)="page = $event" id="secondary"></pagination-controls>
 </div>

@@ -10,9 +10,12 @@ import { ChannelService } from '../channel.service';
 })
 export class ChannelComponent implements OnInit {
 
-	selectedRow: number;
-	channels: Channel[];
-	primaryChannel: Channel[];
+	selectedRow: 		number;
+	channels: 			Channel[];
+	primaryChannel: 	Channel[];
+	key: 				string = 'name'; //set default
+  	reverse: 			boolean = false;
+  	page:				number = 1;
 
 	constructor( private channelService: ChannelService ) { }
 
@@ -29,7 +32,10 @@ export class ChannelComponent implements OnInit {
     	this.selectedRow = index;
     	this.primaryChannel = channel;
     	this.channelService.primary = channel;
-    	console.log( channel );
-    	//this.channelService.primary = this.channels[ index ];
+    }
+
+    sort( key ) {
+    	this.key = key;
+    	this.reverse = !this.reverse;
     }
 }
