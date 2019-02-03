@@ -3,8 +3,8 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 image:
-  repository: draft
-  tag: dev
+  repository: 10.103.88.62:5000/jasonk98/channels-app
+  tag: ersion
   pullPolicy: IfNotPresent
 service:
   name: channels-app
