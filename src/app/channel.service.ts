@@ -20,9 +20,7 @@ export class ChannelService {
 		// this will pass the data in it's orginal format allowing it be unique to both
 		// the primary and secondary channel lists.
 		// This fixed problem with the ordering not being unique to each list.
-		let channels = CHANNELS.map( x => Object.assign( {}, x ) );
-		console.log( channels );
-		return of( channels );
+		return of(  CHANNELS.map( x => Object.assign( {}, x ) ) );
 	}
 
 	setRedudancy() {

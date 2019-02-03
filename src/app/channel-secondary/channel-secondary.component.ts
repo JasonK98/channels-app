@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { Channel } from '../channel/channel.model';
 import { ChannelService } from '../channel.service';
@@ -10,7 +10,7 @@ import { ChannelService } from '../channel.service';
 })
 export class ChannelSecondaryComponent implements OnInit {
 
-	@Input() primary: 		Channel[];
+	@Input() primary: 		Channel;
 	channels: 				Channel[];
 	newPrimary: 			Channel[] = [];
 	key: 					string = 'name'; // Set default ordering
@@ -20,8 +20,27 @@ export class ChannelSecondaryComponent implements OnInit {
 
 	constructor( private channelService: ChannelService ) { }
 
+
 	ngOnInit() {
 		this.getChannels();
+	}
+
+	ngOnChanges( changes: SimpleChanges ) {
+		for ( let propName in changes ) {
+			let change = changes[ propName ];
+			let curVal = JSON.parse( JSON.stringify( change.currentValue ) );
+			let prevVal = JSON.stringify( change.previousValue );
+			// If redudancy channel is set then should display selected channel
+			// on the curent on index on the correct page
+			if ( curVal.redudancy_id !== null ) {
+				let index = this.channels.findIndex( channel => channel.id === this.channelService.primary.redudancy_id );
+				let page = Math.ceil( index / this.itemsPerPage );
+		    	this.page = ( page < 1 ) ? 1 : page; 
+			} else {
+				// Reset the page to 1 if no redudancy channel has been set
+				this.page = 1;
+			}
+		}
 	}
 
 	getChannels(): void {
@@ -31,7 +50,6 @@ export class ChannelSecondaryComponent implements OnInit {
 
 	setClickedRow = function( index ) {
 		var absoluteIndex = this.absoluteIndex( index );
-		console.log( absoluteIndex );
     	this.selectedRow = absoluteIndex;
     	this.channelService.secondary = this.channels[ absoluteIndex ];
     	this.channelService.setRedudancy();
@@ -47,9 +65,6 @@ export class ChannelSecondaryComponent implements OnInit {
     }
 
     getIndex( redudancy: Channel, channel: Channel ): boolean {
-    	console.log( this.channelService.primary );
-    	console.log( this.channelService.secondary );
-    	console.log( typeof this.channelService.secondary );
     	if ( typeof this.channelService.secondary !== 'undefined' ) {
     		this.channelService.primary = redudancy;
     		this.channelService.secondary = channel;
@@ -70,12 +85,5 @@ export class ChannelSecondaryComponent implements OnInit {
 	    		return false;
 	    	}
     	}
-    }
-
-    trackByFn( index, channel ) {
-    	var absolute_index = this.itemsPerPage * ( this.page - 1 ) + index;
-		console.log( absolute_index );
-		//return ( page ) < 1 ? 1 : page;
-    	return index;
     }
 }
