@@ -3,10 +3,10 @@
 		<div class="col-xs-6">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h4>Primary Channel</h4>
+					<h4 class="pull-left">Primary Channel</h4>
 					<div class="form-group row">
 						<div class="col-xs-6">
-							<input placeholder="Search...." type="text" class="form-control form-control-sm" name="search" [(ngModel)]="filter">
+							<input placeholder="Search...." type="text" class="form-control form-control-sm filter" name="search" [(ngModel)]="filter">
 						</div>
 					</div>  
 				</div>
@@ -39,8 +39,8 @@
 				        </tr>
 				    </tbody>
 				</table>
-				<hr>
-				<pagination-controls (pageChange)="page = $event" id="primary"></pagination-controls>
+				<br>
+				<pagination [boundaryLinks]="true" [totalItems]="channels.length" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [(ngModel)]="page"></pagination>
 			</div>
 		</div>
 		<div *ngIf="primaryChannel" class="col-xs-6">

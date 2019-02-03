@@ -1,8 +1,0 @@
-div.container table {
-	cursor: pointer;
-}
-
-.table tr.active td {
-  background-color: #1E90FF !important;
-  color: white;
-}

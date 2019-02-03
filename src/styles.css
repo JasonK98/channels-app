@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+h4 {
+	font-size: 22px;
+	font-family: "Verdana"
+}
+
+div.container table {
+	cursor: pointer;
+}
+
+.table tr.active td {
+  background-color: #1E90FF !important;
+  color: white;
+}
+
+.filter {
+	margin-top: 5px;
+	margin-left: 10px;
+}
