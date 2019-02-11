@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TabDirective } from 'ngx-bootstrap/tabs';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'channel-app';
+  value: string;
+
+  onSelect( data: TabDirective ): void {
+    this.value = data.heading;
+  }
 }

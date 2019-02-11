@@ -11,7 +11,7 @@ import { ChannelService } from '../channel.service';
 export class ChannelSecondaryComponent implements OnInit {
 
 	@Input() primary: 		Channel;
-	channels: 				Channel[];
+	channels: 				Channel[] = [];
 	newPrimary: 			Channel[] = [];
 	key: 					string = 'name'; // Set default ordering
   	reverse: 				boolean = false;
@@ -32,8 +32,8 @@ export class ChannelSecondaryComponent implements OnInit {
 			let prevVal = JSON.stringify( change.previousValue );
 			// If redudancy channel is set then should display selected channel
 			// on the curent on index on the correct page
-			if ( curVal.redudancy_id !== null ) {
-				let index = this.channels.findIndex( channel => channel.id === this.channelService.primary.redudancy_id );
+			if ( curVal.redundancy_id !== null ) {
+				let index = this.channels.findIndex( channel => channel.id === this.channelService.primary.redundancy_id );
 				let page = Math.ceil( index / this.itemsPerPage );
 		    	this.page = ( page < 1 ) ? 1 : page; 
 			} else {
@@ -68,8 +68,8 @@ export class ChannelSecondaryComponent implements OnInit {
     	if ( typeof this.channelService.secondary !== 'undefined' ) {
     		this.channelService.primary = redudancy;
     		this.channelService.secondary = channel;
-    		if ( this.channelService.primary.redudancy_id === this.channelService.secondary.id ) {
-	    		let index = this.channels.findIndex( channel => channel.id === this.channelService.primary.redudancy_id );
+    		if ( this.channelService.primary.redundancy_id === this.channelService.secondary.id ) {
+	    		let index = this.channels.findIndex( channel => channel.id === this.channelService.primary.redundancy_id );
 		    	let page = Math.ceil( index / this.itemsPerPage );
 		    	if ( page < 1 ) {
 		    		this.page = 1;

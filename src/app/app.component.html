@@ -1,6 +1,18 @@
 <h1 class="text-center">Channel App</h1>
-<hr>
-<app-channel></app-channel>
 <div class="container">
-	<span class="label label-success">Redudancy Channnel Set</span>
+	<tabset>
+	  <tab heading="Feeds" class="mt-2" (select)="onSelect( $event )">
+	    <h4 class="text-center">Feeds</h4>
+	    <br>
+	    <app-feeds></app-feeds>
+	  </tab>
+	  <tab heading="Redundancy" class="mt-2" (select)="onSelect( $event )">
+	    <h4 class="text-center">Redundancy</h4>
+	    <br>
+	    <app-channel></app-channel>
+	    <div class="container">
+			<span class="label label-success">Redudancy Channnel Set</span>
+		</div>
+	  </tab>
+	</tabset>
 </div>

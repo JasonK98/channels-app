@@ -11,7 +11,7 @@ import { ChannelService } from '../channel.service';
 export class ChannelComponent implements OnInit {
 
 	selectedRow: 		number;
-	channels: 			Channel[];
+	channels: 			Channel[] = [];
 	primaryChannel: 	Channel[];
 	key: 				string = 'name'; //set default
   	reverse: 			boolean = false;
@@ -25,7 +25,9 @@ export class ChannelComponent implements OnInit {
 
 	getChannels(): void {
 		this.channelService.getChannels()
-			.subscribe( channels => this.channels = channels );
+			.subscribe( channels => {
+				this.channels = channels;
+			} );
 	}
 
 	setClickedRow = function( index, channel ) {

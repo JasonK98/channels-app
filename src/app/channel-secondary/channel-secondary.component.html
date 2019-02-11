@@ -24,7 +24,7 @@
         <tbody>
             <tr *ngFor="let channel of channels | orderBy: key : reverse | filter : filter | paginate: { itemsPerPage: 10, currentPage: page, id: 'secondary' }; let i = index"
                 (click)="setClickedRow( i )" 
-                [class.active]="primary.redudancy_id === channel.id">
+                [class.active]="primary.redundancy_id === channel.id">
                 <td>{{ channel.id }}</td>
                 <td>{{ channel.name }}</td>
                 <td>{{ channel.uri }}</td>

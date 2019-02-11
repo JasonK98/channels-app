@@ -1,16 +1,36 @@
-<div class="container">
-	<div class="row">
-		<div class="col-xs-6">
+<div class="row">
+	<div class="col-xs-4">
+		<div class="panel-group">
+			<div class="panel panel-default">
+				<div class="panel-heading text-center">
+					<button class="btn btn-success feed-add">Add Feed</button>
+				</div>
+				<div class="panel-body">
+					<ul *ngFor="let feed of feeds; let i = index"
+						class="list-group"
+						(click)="selectFeed( i, feed )">
+						<li class="list-group-item" [class.active]="currentFeedIndex === i">
+							{{ feed.name }}
+							<span class="badge badge-primary badge-pill">{{ feed.channels.length }}</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-8" *ngIf="feed">
+		<div class="panel-group">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h4 class="pull-left">Primary Channel</h4>
+					<h4 class="pull-left">{{ feed.name }}</h4>
 					<div class="form-group row">
-						<div class="col-xs-6">
+						<div class="col-xs-4">
 							<input placeholder="Search...." type="text" class="form-control form-control-sm filter" name="search" [(ngModel)]="filter">
 						</div>
-					</div>  
+					</div>
 				</div>
-				<table class="table table-hover">
+				<div class="panel-body">
+					<table class="table table-hover">
 				    <thead>
 				        <tr>
 				            <th (click)="sort( 'id' )">ID
@@ -29,7 +49,6 @@
 				    </thead>
 				    <tbody>
 				        <tr *ngFor="let channel of channels | orderBy: key : reverse | filter : filter | paginate: { itemsPerPage: 10, currentPage: page, id: 'primary' }; let i = index"
-				        	(click)="setClickedRow( i, channel )" 
 				        	[class.active]="i == selectedRow"
 				        	[class.success]="channel.redundancy_id !== null">
 				            <td>{{ channel.id }}</td>
@@ -41,10 +60,8 @@
 				</table>
 				<br>
 				<pagination [boundaryLinks]="true" [totalItems]="channels.length" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [(ngModel)]="page"></pagination>
+				</div>
 			</div>
-		</div>
-		<div *ngIf="primaryChannel" class="col-xs-6">
-			<app-channel-secondary [primary]="primaryChannel"></app-channel-secondary>
 		</div>
 	</div>
 </div>
